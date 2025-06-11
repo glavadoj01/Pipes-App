@@ -1,0 +1,91 @@
+<section class="mx-10">
+  <h1 class="text-2xl font-bold">Pipes Básicos</h1>
+  <h3 class="text-xl font-thin">Pipes incluidos en Angular +17</h3>
+</section>
+
+
+<section class="items-center mx-2">
+  <div class="stats stats-vertical lg:stats-horizontal shadow w-full">
+    <div class="stat">
+      <div class="stat-title">Lowercase Pipe</div>
+      <div class="stat-value">{{ nameUpper() | lowercase }}</div>
+      <div class="stat-desc">Valor Original: {{ nameUpper() }}</div>
+    </div>
+
+    <div class="stat">
+      <div class="stat-title">Uppercase Pipe</div>
+      <div class="stat-value">{{ nameLower() | uppercase }}</div>
+      <div class="stat-desc">Valor Original: {{ nameLower() }}</div>
+    </div>
+
+    <div class="stat">
+      <div class="stat-title">TitleCase Pipe</div>
+      <div class="stat-value">{{ fullName() | titlecase }}</div>
+      <div class="stat-desc">Valor Original: {{ fullName() }}</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <h2 class="text-center">Valor Original: {{ customDate() }}</h2>
+
+  <div class="divider"></div>
+
+  <div class="stats stats-vertical lg:stats-horizontal shadow w-full">
+    <div class="stat">
+      <div class="stat-title">Date Pipe</div>
+      <div class="stat-value">{{ customDate() | date}}</div>
+    </div>
+
+    <div class="stat">
+      <div class="stat-title">DateLong Pipe: GMT+2</div>
+      <div class="stat-value">{{ customDate() | date: 'long' : 'GMT+2' :'es' }}</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+ <div class="stats stats-vertical lg:stats-horizontal shadow w-full">
+   <div class="stat">
+     <div class="stat-title">DateMedium Pipe: GMT+2</div>
+     <div class="stat-value">{{ customDate() | date: 'medium' : 'GMT+2' :'es' }}</div>
+   </div>
+   <div class="stat">
+     <div class="stat-title">DateSort Pipe: GMT+2</div>
+     <div class="stat-value">{{ customDate() | date: 'short' : 'GMT+2' :'es' }}</div>
+   </div>
+ </div>
+
+  <div class="divider"></div>
+
+  <div class="stats stats-vertical lg:stats-horizontal shadow w-full">
+    <div class="stat">
+      <div class="stat-title">Date dd/MM/yyyy</div>
+      <div class="stat-value">{{ customDate() | date: 'dd/MM/yyyy' }}</div>
+    </div>
+    <div class="stat">
+      <div class="stat-title">Date HH:mm:ss</div>
+      <div class="stat-value">{{ customDate() | date: 'HH:mm:ss' }}</div>
+    </div>
+    <div class="stat">
+      <div class="stat-title">Date EEEE d, MMMM</div>
+      <div class="stat-value">{{ customDate() | date: 'EEEE d, MMMM' }}</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="flex flex-row gap-5 justify-center">
+    <div>
+      <h1 class="text-2xl">Local Actual:
+        <span class="badge badge-secondary">{{ currentLocale }}</span>
+      </h1>
+    </div>
+
+    <button (click)="changeLocale('es')" class="btn btn-primary "> Cambiar a Español</button>
+    <button (click)="changeLocale('en')" class="btn btn-primary "> Change to English</button>
+    <button (click)="changeLocale('fr')" class="btn btn-primary "> Changer en français</button>
+
+  </div>
+</section>
+

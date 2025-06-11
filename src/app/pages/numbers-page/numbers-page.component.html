@@ -1,0 +1,24 @@
+<section class="mx-10">
+  <h1 class="text-2xl font-bold">Pipes Numéricos</h1>
+  <h3 class="text-xl font-thin">Pipes incluidos en Angular +17</h3>
+</section>
+
+<div class="stats stats-vertical lg:stats-horizontal shadow w-full">
+  <div class="stat">
+    <div class="stat-title">Number Pipe: '1.2-2'</div>
+    <div class="stat-value">{{ totalShells() | number: '1.2-2'}}</div>
+    <div class="stat-desc">Valor Original: {{ totalShells() }}</div>
+  </div>
+
+  <div class="stat">
+    <div class="stat-title">Uppercase Pipe</div>
+    <div class="stat-value">{{ percentShell() | percent: '1.1-1' }}</div>
+    <div class="stat-desc">Valor Original: {{ percentShell() }}</div>
+  </div>
+
+  <div class="stat">
+    <div class="stat-title">TitleCase Pipe</div>
+    <div class="stat-value">{{ totalShells() | currency: 'EUR' : 'symbol-narrow' : '1.2-4'}}</div>
+    <div class="stat-desc">Valor Original: {{ totalShells() }}</div>
+  </div>
+</div>
