@@ -1,1 +1,82 @@
-<p>uncommons-page works!</p>,
+<section class="mx-10 mb-5">
+  <h1 class="text-2xl font-bold">Pipes poco comunes</h1>
+  <h3 class="text-xl font-thin">Pipes incluidos en Angular +17</h3>
+</section>
+
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mx-10">
+
+  <app-card title="i18nSelectPipe">
+    <p>Saludos {{ client().name }}, tenemos el placer de {{ client().gender | i18nSelect:invitationMap  }} a nuestro proximo evento</p>
+    <button (click)="changeClient()" class="btn btn-primary">Cambiar cliente</button>
+  </app-card>
+
+  <app-card title="i18nPluralPipe">
+    <p>{{ clients().length | i18nPlural:clientsNap() }} </p>
+    <button
+      [disabled]="clients().length === 0"
+      (click)="deleteClient()"
+      class="btn btn-primary"
+    >Borrar cliente
+    </button>
+  </app-card>
+
+  <app-card title="Slice Pipe">
+    <b>Texto Original</b>
+    <p class="text-primary">{{ clients().join(', ') }}</p>
+
+    <b class="mt-2">Slice 0:2</b>
+    <p class="text-primary">{{ clients() | slice: 0:2 }} </p>
+
+    <b class="mt-2">Slice 1:2</b>
+    <p class="text-primary">{{ clients() | slice: 1:2 }} </p>
+
+    <b class="mt-2">Slice 0:-2</b>
+    <p class="text-primary">{{ clients() | slice: 0:-2 }} </p>
+  </app-card>
+
+  <app-card title="Json Pipe">
+    <pre class="text-primary">{{ client() | json }}</pre>
+    <pre class="text-primary">{{ clients() | json }}</pre>
+    <pre class="text-primary">{{ clients().join(', ') | json }}</pre>
+  </app-card>
+
+  <app-card title="KeyValue Pipe 1">
+    <pre class="text-primary">{{ profile | keyvalue | json }}</pre>
+  </app-card>
+
+  <app-card title="KeyValue Pipe 2">
+    <ul>
+      @for (item of profile | keyvalue; track item.key) {
+        <li>
+          <strong> {{ item.key | titlecase }} : </strong>
+          <span class="text-primary">
+            {{ item.value }}
+          </span>
+        </li>
+      }
+    </ul>
+  </app-card>
+
+  <app-card title="Async Pipe 1">
+    <pre class="text-primary">{{ promiseValue | async }}</pre>
+  </app-card>
+
+  <app-card title="Async Pipe 2">
+    @if(promiseValue | async; as value) {
+      <pre class="text-primary">{{ value }}</pre>
+    }
+    @else {
+      <pre class="text-secondary">Cargando...</pre>
+    }
+  </app-card>
+
+  <app-card title="Async Pipe 3">
+    <h3 class="text-2xl font-bold">Observable</h3>
+    <pre>{{ myObservable| async }}</pre>
+    @if(myObservable | async; as value) {
+      <pre>Valor: {{ value }}</pre>
+    }@else{
+      <pre class="text-secondary">Cargando...</pre>
+    }
+  </app-card>
+</section>
