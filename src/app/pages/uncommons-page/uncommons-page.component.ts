@@ -81,6 +81,7 @@ export default class UncommonsPageComponent {
   })
 
   myObservable = interval(2000).pipe(
+    tap(value => console.log('Valor del observable:', value)),
     map( value => value + 1),
   )
 }

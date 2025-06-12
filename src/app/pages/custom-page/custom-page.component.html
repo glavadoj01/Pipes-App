@@ -1,1 +1,115 @@
-<p>custom-page works!</p>,
+<section class="mx-10">
+  <h1 class="text-2xl font-bold">Pipes <span class="text-red-300">Personalizados</span></h1>
+  <h3 class="text-xl font-thin">Pipes <span class="text-red-300">NO</span> incluidos en Angular</h3>
+</section>
+
+<section>
+  <div class="stats shadow">
+    <div class="stat">
+      <div class="stat-title">ToggleCase Pipe</div>
+      <div class="stat-value">{{ name() | toggleCase: upperCase() }}</div>
+      <div class="stat-desc">Valor Original: {{ name() }}</div>
+      <!--
+      Lo habitual es utilizar un Método con el click
+        (click)="toggleCase()"
+      En el componente:
+        toggleCase() {
+          if (this.upperCase()) {
+            this.upperCase.set(false)
+          }
+          else {
+            this.upperCase.set(true)
+          }
+        }
+      Pero en este caso, como es un toggle:boolean, se puede hacer directamente con el set
+       -->
+      <button class="btn btn-primary mt-2" (click)="upperCase.set(!upperCase())">Toggle Case</button>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section class="mx-10">
+  <h1 class="text-2xl font-bold justify-start"
+  >
+    <pre>Filtrando por: <span class="text-red-300">{{ searchQuery() }}</span></pre>
+    <pre>Ordenando por: <span class="text-red-300">{{ sortBy() | titlecase }}</span></pre>
+  </h1>
+</section>
+
+<div class="divider"></div>
+
+<section class="my-2 md:inline-flex gap-20 w-full mx-10 overflow-auto">
+  <div class="text-2xl font-bold justify-start">
+    <input
+      type="text"
+      class="input input-bordered max-w-xs mt-2"
+      placeholder="Buscar héroe"
+      #txtSearch
+      (input)="searchQuery.set(txtSearch.value)"
+    />
+  </div>
+
+  <div class="flex gap-2 justify-end w-full mx-10 my-2">
+    <button (click)="searchQuery.set(''); sortBy.set(null)" class="btn btn-ghost">Limpiar búsqueda</button>
+    <button (click)="sortBy.set('name')" class="btn btn-primary" >Por nombre</button>
+    <button (click)="sortBy.set('canFly')" class="btn btn-secondary" >Por volar</button>
+    <button (click)="sortBy.set('color')" class="btn btn-accent" >Por color</button>
+    <button (click)="sortBy.set('creator')" class="btn btn-info" >Por creador</button>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section class="flex justify-center w-full m-10">
+  <table class="table table-xs w-fit">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Nombre</th>
+        <th>Puede Volar</th>
+        <th>Color</th>
+        <th>Creador</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for( heroe of heroes() | heroFilter: searchQuery() | heroSortBy:sortBy(); track heroe.id; let i = $index ) {
+        <tr>
+          <th>
+            {{ heroe.id }}
+          </th>
+          <td>
+            {{ heroe.name | titlecase }}
+          </td>
+          <td>
+            <span
+              class="text-xs w-44"
+              [class.text-success]="heroe.canFly"
+              [class.text-accent]="!heroe.canFly"
+            >
+            {{ heroe.canFly| canFly }}
+            </span>
+          </td>
+          <td>
+            <span
+              class="text-xs w-44"
+              [style.color]="heroe.color | heroTextColor"
+            >
+              {{ heroe.color | heroColor | titlecase }}
+            </span>
+          </td>
+          <td>
+            <span
+              class="text-xs w-44"
+              [class.text-primary]="heroe.creator === 0"
+              [class.text-secondary]="heroe.creator === 1"
+            >
+              {{ heroe.creator| heroCreator | titlecase }}
+            </span>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</section>
